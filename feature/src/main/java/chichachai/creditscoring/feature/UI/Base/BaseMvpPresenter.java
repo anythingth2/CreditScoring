@@ -4,8 +4,8 @@ import java.lang.ref.WeakReference;
 
 import chichachai.creditscoring.feature.UI.Base.Exception.MvpViewNotAttachedException;
 
-public abstract class BaseMvpPresenter <V extends BaseMvpInterface.View>
-implements BaseMvpInterface.Presenter<V>{
+public abstract class BaseMvpPresenter<V extends BaseMvpInterface.View>
+        implements BaseMvpInterface.Presenter<V> {
     private WeakReference<V> mMvpView;
 
 
@@ -16,12 +16,12 @@ implements BaseMvpInterface.Presenter<V>{
 
     @Override
     public void detachView() {
-    mMvpView = null;
+        mMvpView = null;
     }
 
     @Override
-    public V getView() throws NullPointerException{
-        if(mMvpView != null)return mMvpView.get();
+    public V getView() throws NullPointerException {
+        if (mMvpView != null) return mMvpView.get();
         throw new MvpViewNotAttachedException();
     }
 
@@ -41,7 +41,7 @@ implements BaseMvpInterface.Presenter<V>{
     }
 
     @Override
-    public void onVIewStop() {
+    public void onViewStop() {
 
     }
 }

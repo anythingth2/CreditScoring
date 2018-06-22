@@ -1,50 +1,74 @@
 package chichachai.creditscoring.feature.UI.Base;
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import chichachai.creditscoring.feature.UI.Base.Exception.MvpNotSetLayoutException;
 import chichachai.creditscoring.feature.UI.Base.Exception.MvpPresenterNotCreateException;
 
-public abstract class BaseMvpActivity<P extends BaseMvpInterface.Presenter>
-        extends AppCompatActivity
-        implements BaseMvpInterface.View {
+
+/**
+ * Created by TheKhaeng on 12/17/2016.
+ */
+
+public abstract class BaseMvpFragment<P extends BaseMvpInterface.Presenter>
+        extends Fragment
+        implements BaseMvpInterface.View{
 
     private P presenter;
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings( "unchecked" )
     @Override
     public void onCreate( Bundle savedInstanceState ){
         super.onCreate( savedInstanceState );
         presenter = createPresenter();
         presenter.attachView( this );
+        if( savedInstanceState == null ){
+        }else{
+            onRestoreInstanceState( savedInstanceState );
+        }
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ){
         int layoutResId = getLayoutView();
         if( getLayoutView() == 0 ) throw new MvpNotSetLayoutException();
-        setContentView( layoutResId );
-        bindView();
+        return inflater.inflate( layoutResId, container, false );
+    }
+
+    @Override
+    public void onViewCreated( View view, @Nullable Bundle savedInstanceState ){
+        super.onViewCreated( view, savedInstanceState );
+        bindView( view );
         setupInstance();
         setupView();
         getPresenter().onViewCreate();
         if( savedInstanceState == null ){
             initialize();
+        }else{
+            restoreView( savedInstanceState );
         }
     }
 
+
     @Override
-    protected void onStart(){
+    public void onStart(){
         super.onStart();
         getPresenter().onViewStart();
     }
 
     @Override
-    protected void onStop(){
+    public void onStop(){
         super.onStop();
         getPresenter().onViewStop();
     }
 
     @Override
-    protected void onDestroy(){
+    public void onDestroy(){
         super.onDestroy();
         getPresenter().onViewDestroy();
         presenter.detachView();
@@ -58,24 +82,19 @@ public abstract class BaseMvpActivity<P extends BaseMvpInterface.Presenter>
     }
 
     @Override
-    protected void onSaveInstanceState( Bundle outState ){
+    public void onSaveInstanceState( Bundle outState ){
         super.onSaveInstanceState( outState );
     }
 
-
-    @Override
-    protected void onRestoreInstanceState( Bundle savedInstanceState ){
-        super.onRestoreInstanceState( savedInstanceState );
-        restoreView(savedInstanceState);
+    public void onRestoreInstanceState( Bundle savedInstanceState ){
     }
 
-    public void restoreView( Bundle savedInstanceState ){}
 
     public abstract P createPresenter();
 
     public abstract int getLayoutView();
 
-    public abstract void bindView();
+    public abstract void bindView( View view );
 
     public abstract void setupInstance();
 
@@ -83,5 +102,8 @@ public abstract class BaseMvpActivity<P extends BaseMvpInterface.Presenter>
 
     public abstract void initialize();
 
+    public void restoreView( Bundle savedInstanceState ){
+    }
 
 }
+

@@ -2,11 +2,11 @@ package chichachai.creditscoring.feature.UI.Base;
 
 public class BaseMvpInterface {
 
-    interface View {
+    public interface View {
         Presenter getPresenter();
     }
 
-    interface Presenter<V extends BaseMvpInterface.View> {
+    public interface Presenter<V extends BaseMvpInterface.View> {
         void attachView(V mvpView);
 
         void detachView();
@@ -19,6 +19,6 @@ public class BaseMvpInterface {
 
         void onViewStart();
 
-        void onVIewStop();
+        void onViewStop();
     }
 }

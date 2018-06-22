@@ -1,3 +1,31 @@
 <resources>
     <string name="app_name">CreditScoring</string>
+
+    <string-array name="question_titles">
+        <item>Question0</item>
+        <item>Question1</item>
+        <item>Question2</item>
+        <item>Question3</item>
+        <item>Question4</item>
+    </string-array>
+    <string-array name="answer_lists0">
+        <item>Answers0</item>
+        <item>Answers1</item>
+    </string-array>
+    <string-array name="answer_lists1">
+        <item>Answers2</item>
+        <item>Answers3</item>
+    </string-array>
+    <string-array name="answer_lists2">
+        <item>Answers4</item>
+        <item>Answers5</item>
+    </string-array>
+    <string-array name="answer_lists3">
+        <item>Answers6</item>
+        <item>Answers7</item>
+    </string-array>
+    <string-array name="answer_lists4">
+        <item>Answers8</item>
+        <item>Answers9</item>
+    </string-array>
 </resources>
