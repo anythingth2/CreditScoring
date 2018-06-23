@@ -34,8 +34,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:inputType="numberPassword"
-            android:maxLength="8"
-            android:maxLines="1" />
+            />
     </LinearLayout>
 
 

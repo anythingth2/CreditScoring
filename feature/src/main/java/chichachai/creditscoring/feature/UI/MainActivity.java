@@ -7,7 +7,7 @@ import android.widget.FrameLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import chichachai.creditscoring.feature.Models.Customer;
+import chichachai.creditscoring.feature.Data.Models.Customer;
 import chichachai.creditscoring.feature.R;
 import chichachai.creditscoring.feature.UI.Adapter.Question.QuestionAdapter;
 import chichachai.creditscoring.feature.UI.Adapter.Question.QuestionItem;

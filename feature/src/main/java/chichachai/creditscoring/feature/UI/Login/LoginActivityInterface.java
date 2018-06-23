@@ -8,6 +8,6 @@ public class LoginActivityInterface {
     }
 
     public interface Presenter extends BaseMvpInterface.Presenter<LoginActivityInterface.View> {
-
+        void onKeyReceive(int key);
     }
 }

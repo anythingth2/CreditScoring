@@ -1,21 +1,23 @@
 package chichachai.creditscoring.feature.UI.Login;
 
 import android.content.Intent;
-import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 
-import java.util.ArrayList;
+import java.text.ParseException;
 
-import chichachai.creditscoring.feature.Models.Customer;
+import chichachai.creditscoring.feature.Data.DataManager;
+import chichachai.creditscoring.feature.Data.Models.Customer;
 import chichachai.creditscoring.feature.R;
-import chichachai.creditscoring.feature.UI.Adapter.Question.QuestionItem;
 import chichachai.creditscoring.feature.UI.Base.BaseMvpActivity;
 import chichachai.creditscoring.feature.UI.MainActivity;
 
 public class LoginActivity extends BaseMvpActivity<LoginActivityInterface.Presenter> {
-
+    private static final String TAG = LoginActivity.class.getName();
     EditText etLogin;
 
     @Override
@@ -41,7 +43,8 @@ public class LoginActivity extends BaseMvpActivity<LoginActivityInterface.Presen
 
     @Override
     public void setupView() {
-        etLogin.setOnKeyListener(loginOnKeyListener());
+
+        etLogin.addTextChangedListener(onTextChangeListener());
     }
 
     @Override
@@ -49,17 +52,24 @@ public class LoginActivity extends BaseMvpActivity<LoginActivityInterface.Presen
 
     }
 
-    EditText.OnKeyListener loginOnKeyListener() {
-        return new EditText.OnKeyListener() {
+    TextWatcher onTextChangeListener() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
 
             @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                EditText editText = (EditText) view;
-                int textLength = editText.getText().length();
-                if (textLength >= 8) {
+            public void onTextChanged(CharSequence text, int i, int i1, int i2) {
+                if (text.length() >= 8) {
+                    getPresenter().onKeyReceive(Integer.parseInt(text.toString()));
                     goMainActivity();
                 }
-                return false;
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         };
     }
