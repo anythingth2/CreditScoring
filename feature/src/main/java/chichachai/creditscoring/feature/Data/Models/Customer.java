@@ -3,19 +3,27 @@ package chichachai.creditscoring.feature.Data.Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Customer implements Parcelable {
 
 
     private String name;
     private int id;
 
+    int[] scoreList;
+
     public Customer() {
         super();
     }
 
-    public Customer(int id, String name) {
+    public Customer(int id, String name, int numberQuestion) {
         this.name = name;
         this.id = id;
+        this.scoreList = new int[numberQuestion];
+        Arrays.fill(scoreList, -1);
     }
 
     protected Customer(Parcel in) {
@@ -60,5 +68,13 @@ public class Customer implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(name);
         parcel.writeInt(id);
+    }
+
+    public void setScore(int pos, int score) {
+        this.scoreList[pos] = score;
+    }
+
+    public int[] getScoreList() {
+        return scoreList;
     }
 }

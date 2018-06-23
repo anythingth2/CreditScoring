@@ -1,5 +1,11 @@
 package chichachai.creditscoring.feature.UI;
 
+import android.util.Log;
+
+import java.util.Arrays;
+
+import chichachai.creditscoring.feature.Data.DataManager;
+import chichachai.creditscoring.feature.Data.Models.Customer;
 import chichachai.creditscoring.feature.UI.Base.BaseMvpPresenter;
 
 public class MainActivityPresenter
@@ -46,5 +52,19 @@ public class MainActivityPresenter
     @Override
     public void onViewStop() {
         super.onViewStop();
+    }
+
+    @Override
+    public Customer getCustomer() {
+        return DataManager.getCustomer();
+    }
+
+    boolean isAllFilled() {
+        return Arrays.binarySearch(getCustomer().getScoreList(), -1) < 0;
+    }
+
+    @Override
+    public void onPressOk() {
+
     }
 }

@@ -3,15 +3,10 @@ package chichachai.creditscoring.feature.UI.Login;
 import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
-import java.text.ParseException;
-
-import chichachai.creditscoring.feature.Data.DataManager;
-import chichachai.creditscoring.feature.Data.Models.Customer;
 import chichachai.creditscoring.feature.R;
 import chichachai.creditscoring.feature.UI.Base.BaseMvpActivity;
 import chichachai.creditscoring.feature.UI.MainActivity;
@@ -19,6 +14,9 @@ import chichachai.creditscoring.feature.UI.MainActivity;
 public class LoginActivity extends BaseMvpActivity<LoginActivityInterface.Presenter> {
     private static final String TAG = LoginActivity.class.getName();
     EditText etLogin;
+
+
+
 
     @Override
     public LoginActivityInterface.Presenter createPresenter() {
@@ -33,6 +31,7 @@ public class LoginActivity extends BaseMvpActivity<LoginActivityInterface.Presen
     @Override
     public void bindView() {
         etLogin = findViewById(R.id.login_id);
+
     }
 
 
@@ -43,13 +42,20 @@ public class LoginActivity extends BaseMvpActivity<LoginActivityInterface.Presen
 
     @Override
     public void setupView() {
-
         etLogin.addTextChangedListener(onTextChangeListener());
+
     }
 
     @Override
     public void initialize() {
 
+    }
+
+    void goMainActivity() {
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     TextWatcher onTextChangeListener() {
@@ -74,11 +80,5 @@ public class LoginActivity extends BaseMvpActivity<LoginActivityInterface.Presen
         };
     }
 
-    void goMainActivity() {
-
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
 
 }

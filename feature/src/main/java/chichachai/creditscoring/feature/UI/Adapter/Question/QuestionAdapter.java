@@ -32,12 +32,12 @@ public class QuestionAdapter
     @NonNull
     @Override
     public QuestionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new QuestionViewHolder(parent);
+        return new QuestionViewHolder(parent, getPresenter());
     }
 
     @Override
     public void onBindViewHolder(@NonNull QuestionViewHolder holder, int position) {
-        holder.setQuestion((QuestionItem) getPresenter().getQuestionItem().get(position));
+        holder.setQuestion((QuestionItem) getPresenter().getQuestionItem().get(position), position);
     }
 
     @Override
@@ -49,4 +49,7 @@ public class QuestionAdapter
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }
+
+
+
 }
