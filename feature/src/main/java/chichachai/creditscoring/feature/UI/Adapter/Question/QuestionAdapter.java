@@ -38,7 +38,6 @@ public class QuestionAdapter
     @Override
     public void onBindViewHolder(@NonNull QuestionViewHolder holder, int position) {
         holder.setQuestion((QuestionItem) getPresenter().getQuestionItem().get(position));
-        Log.d("onBind",""+(holder.itemView != null));
     }
 
     @Override
@@ -49,6 +48,5 @@ public class QuestionAdapter
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-        Log.d("adapter","attach!");
     }
 }

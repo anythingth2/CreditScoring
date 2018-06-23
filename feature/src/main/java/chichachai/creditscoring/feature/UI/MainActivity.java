@@ -18,11 +18,6 @@ public class MainActivity extends BaseMvpActivity<MainActivityInterface.Presente
 
     RecyclerView rvQuestion;
     QuestionAdapter questionAdapter;
-    FrameLayout contentFrame;
-
-
-
-    Customer customer;
 
     @Override
     public MainActivityInterface.Presenter createPresenter() {
@@ -37,15 +32,6 @@ public class MainActivity extends BaseMvpActivity<MainActivityInterface.Presente
     @Override
     public void bindView() {
         rvQuestion = findViewById(R.id.rv_question);
-        contentFrame = findViewById(R.id.content_frame);
-    }
-
-
-    @Override
-    public void setupInstance() {
-        rvQuestion.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        rvQuestion.setAdapter(questionAdapter);
-
 
     }
 
@@ -57,7 +43,7 @@ public class MainActivity extends BaseMvpActivity<MainActivityInterface.Presente
         ));
         questionItems.add(new QuestionItem("Question2"
                 , QuestionItem.RADIO
-                , Arrays.asList("Ans3", "Ans4")
+                , Arrays.asList("Ans3", "Ans4","EIEI")
         ));
         questionItems.add(new QuestionItem("Question3"
                 , QuestionItem.RADIO
@@ -67,17 +53,19 @@ public class MainActivity extends BaseMvpActivity<MainActivityInterface.Presente
     }
 
     @Override
-    public void setupView() {
+    public void setupInstance() {
         setupQuestion();
 
+    }
+
+    @Override
+    public void setupView() {
+        rvQuestion.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        rvQuestion.setAdapter(questionAdapter);
     }
 
     @Override
     public void initialize() {
 
     }
-
-
-
-
 }

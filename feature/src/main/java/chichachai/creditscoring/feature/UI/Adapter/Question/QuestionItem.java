@@ -11,17 +11,19 @@ public class QuestionItem extends BaseItem {
 
     String questionTitle;
     int type;
-    List<String> answer;
+    List<String> choices;
 
     public QuestionItem(String question, int type,List<String> answer) {
         this.questionTitle = question;
         this.type = type;
-        this.answer = answer;
+        this.choices = answer;
     }
 
     public String getQuestionTitle() {
         return questionTitle;
     }
 
-
+    public List<String> getChoices() {
+        return choices;
+    }
 }
