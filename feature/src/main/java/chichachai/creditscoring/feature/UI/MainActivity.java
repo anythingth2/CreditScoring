@@ -1,20 +1,21 @@
 package chichachai.creditscoring.feature.UI;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import chichachai.creditscoring.feature.Data.Models.Customer;
 import chichachai.creditscoring.feature.R;
 import chichachai.creditscoring.feature.UI.Adapter.Question.QuestionAdapter;
 import chichachai.creditscoring.feature.UI.Adapter.Question.QuestionItem;
 import chichachai.creditscoring.feature.UI.Base.BaseMvpActivity;
+import chichachai.creditscoring.feature.UI.Login.LoginActivity;
 
 public class MainActivity extends BaseMvpActivity<MainActivityInterface.Presenter>
         implements MainActivityInterface.View {
@@ -105,31 +106,48 @@ public class MainActivity extends BaseMvpActivity<MainActivityInterface.Presente
         btOk.setOnClickListener(okOnClickListener());
         btCancel.setOnClickListener(cancelOnClickListener());
 
+        setupDialog(getString(R.string.main_confirm_dialog_title)
+                , new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        getPresenter().onConfirmDialog();
+                    }
+                }
+                , new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        getPresenter().onCancelDialog();
+                    }
+                });
     }
 
     @Override
     public void initialize() {
-
     }
 
     View.OnClickListener okOnClickListener() {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               getPresenter().onPressOk();
+                getPresenter().onPressOk();
             }
         };
     }
 
     View.OnClickListener cancelOnClickListener() {
         return new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
-                hideProgressBar();
-                Log.d(TAG, "hide");
+
             }
         };
+    }
+
+
+    public void goLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }

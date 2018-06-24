@@ -28,4 +28,7 @@
         <item>Answers8</item>
         <item>Answers9</item>
     </string-array>
+
+    <string name="main_confirm_dialog_title">ยืนยันการให้คะแนน</string>
+    <string name="main_confirm_dialog_message"></string>
 </resources>

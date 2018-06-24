@@ -32,6 +32,7 @@
             android:id="@+id/login_id"
             style="@style/Base.TextAppearance.AppCompat.Title"
             android:layout_width="196dp"
+            android:maxLength="8"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:inputType="numberPassword" />

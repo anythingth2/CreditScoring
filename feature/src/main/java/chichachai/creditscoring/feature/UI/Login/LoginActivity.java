@@ -11,7 +11,8 @@ import chichachai.creditscoring.feature.R;
 import chichachai.creditscoring.feature.UI.Base.BaseMvpActivity;
 import chichachai.creditscoring.feature.UI.MainActivity;
 
-public class LoginActivity extends BaseMvpActivity<LoginActivityInterface.Presenter> {
+public class LoginActivity extends BaseMvpActivity<LoginActivityInterface.Presenter>
+implements LoginActivityInterface.View{
     private static final String TAG = LoginActivity.class.getName();
     EditText etLogin;
 
@@ -31,7 +32,6 @@ public class LoginActivity extends BaseMvpActivity<LoginActivityInterface.Presen
     @Override
     public void bindView() {
         etLogin = findViewById(R.id.login_id);
-
     }
 
 
@@ -43,7 +43,6 @@ public class LoginActivity extends BaseMvpActivity<LoginActivityInterface.Presen
     @Override
     public void setupView() {
         etLogin.addTextChangedListener(onTextChangeListener());
-
     }
 
     @Override
@@ -51,7 +50,9 @@ public class LoginActivity extends BaseMvpActivity<LoginActivityInterface.Presen
 
     }
 
-    void goMainActivity() {
+
+
+    public void goMainActivity() {
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -69,7 +70,6 @@ public class LoginActivity extends BaseMvpActivity<LoginActivityInterface.Presen
             public void onTextChanged(CharSequence text, int i, int i1, int i2) {
                 if (text.length() >= 8) {
                     getPresenter().onKeyReceive(Integer.parseInt(text.toString()));
-                    goMainActivity();
                 }
             }
 

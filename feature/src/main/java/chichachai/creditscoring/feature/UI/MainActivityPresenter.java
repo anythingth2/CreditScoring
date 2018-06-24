@@ -1,5 +1,6 @@
 package chichachai.creditscoring.feature.UI;
 
+import android.content.DialogInterface;
 import android.util.Log;
 
 import java.util.Arrays;
@@ -66,5 +67,19 @@ public class MainActivityPresenter
     @Override
     public void onPressOk() {
 
+        getView().showDialog();
     }
+
+    @Override
+    public void onConfirmDialog() {
+
+    }
+
+    @Override
+    public void onCancelDialog() {
+
+
+    }
+
+
 }

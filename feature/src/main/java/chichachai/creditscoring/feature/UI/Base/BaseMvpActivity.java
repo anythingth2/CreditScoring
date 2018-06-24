@@ -1,7 +1,9 @@
 package chichachai.creditscoring.feature.UI.Base;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -15,7 +17,8 @@ public abstract class BaseMvpActivity<P extends BaseMvpInterface.Presenter>
         implements BaseMvpInterface.View {
 
     private P presenter;
-    protected ProgressBar progressBar;
+
+    private AlertDialog dialog;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -28,7 +31,6 @@ public abstract class BaseMvpActivity<P extends BaseMvpInterface.Presenter>
         if (getLayoutView() == 0) throw new MvpNotSetLayoutException();
         setContentView(layoutResId);
         bindView();
-
         setupInstance();
         setupView();
         getPresenter().onViewCreate();
@@ -58,13 +60,6 @@ public abstract class BaseMvpActivity<P extends BaseMvpInterface.Presenter>
         presenter.detachView();
     }
 
-    protected void showProgressBar() {
-        progressBar.setVisibility(View.VISIBLE);
-    }
-
-    protected void hideProgressBar() {
-        progressBar.setVisibility(View.GONE);
-    }
 
     @Override
     public P getPresenter() {
@@ -98,6 +93,38 @@ public abstract class BaseMvpActivity<P extends BaseMvpInterface.Presenter>
     public abstract void setupView();
 
     public abstract void initialize();
+
+    public void setupDialog(String title
+            , String message
+            , DialogInterface.OnClickListener onPositiveListener
+            , DialogInterface.OnClickListener onNegativeListener) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("ตกลง", onPositiveListener)
+                .setNegativeButton("ยกเลิก", onNegativeListener);
+
+        dialog = builder.create();
+    }
+    public void setupDialog(String title
+            , DialogInterface.OnClickListener onPositiveListener
+            , DialogInterface.OnClickListener onNegativeListener) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setPositiveButton("ตกลง", onPositiveListener)
+                .setNegativeButton("ยกเลิก", onNegativeListener);
+
+        dialog = builder.create();
+    }
+    public void showDialog() {
+        dialog.show();
+    }
+
+    public void hideDialog() {
+        dialog.dismiss();
+    }
 
 
 }
