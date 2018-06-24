@@ -77,4 +77,8 @@ public class Customer implements Parcelable {
     public int[] getScoreList() {
         return scoreList;
     }
+
+    public boolean isAllFilled() {
+        return Arrays.binarySearch(getScoreList(), -1) < 0;
+    }
 }

@@ -1,5 +1,7 @@
 package chichachai.creditscoring.feature.UI;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +13,7 @@ import android.widget.ImageButton;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import chichachai.creditscoring.feature.Data.Models.Customer;
 import chichachai.creditscoring.feature.R;
 import chichachai.creditscoring.feature.UI.Adapter.Question.QuestionAdapter;
 import chichachai.creditscoring.feature.UI.Adapter.Question.QuestionItem;
@@ -94,7 +97,6 @@ public class MainActivity extends BaseMvpActivity<MainActivityInterface.Presente
     @Override
     public void setupInstance() {
         setupQuestion();
-
     }
 
     @Override
@@ -106,19 +108,7 @@ public class MainActivity extends BaseMvpActivity<MainActivityInterface.Presente
         btOk.setOnClickListener(okOnClickListener());
         btCancel.setOnClickListener(cancelOnClickListener());
 
-        setupDialog(getString(R.string.main_confirm_dialog_title)
-                , new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        getPresenter().onConfirmDialog();
-                    }
-                }
-                , new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        getPresenter().onCancelDialog();
-                    }
-                });
+
     }
 
     @Override
@@ -138,11 +128,33 @@ public class MainActivity extends BaseMvpActivity<MainActivityInterface.Presente
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                getPresenter().onPressCancel();
             }
         };
     }
 
+    public void showConfirmDialog() {
+        setupDialog(getString(R.string.main_confirm_dialog_title)
+                , new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        getPresenter().onConfirmDialog();
+                    }
+                }
+                , new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        getPresenter().onCancelDialog();
+                    }
+                });
+        showDialog();
+    }
+
+    @Override
+    public void showAlertItemNotFilledDialog() {
+        setupDialog(getString(R.string.main_alert_fill_dialog_title));
+        showDialog();
+    }
 
     public void goLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);

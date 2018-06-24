@@ -19,7 +19,7 @@ public class LoginActivityPresenter extends BaseMvpPresenter<LoginActivityInterf
     public void onKeyReceive(int key) {
         Log.i("Key", "" + key);
 
-        DataManager.setCustomer(new Customer(12345678, "Customer1",11));
+        DataManager.setCustomer(new Customer(12345678, "Customer1", 11));
         getView().goMainActivity();
     }
 

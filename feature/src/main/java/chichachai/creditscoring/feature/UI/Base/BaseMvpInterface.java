@@ -4,6 +4,8 @@ public class BaseMvpInterface {
 
     public interface View {
         Presenter getPresenter();
+
+        void showToast(String text);
     }
 
     public interface Presenter<V extends BaseMvpInterface.View> {

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import chichachai.creditscoring.feature.UI.Base.Exception.MvpNotSetLayoutException;
 import chichachai.creditscoring.feature.UI.Base.Exception.MvpPresenterNotCreateException;
@@ -19,6 +20,8 @@ public abstract class BaseMvpActivity<P extends BaseMvpInterface.Presenter>
     private P presenter;
 
     private AlertDialog dialog;
+
+    private ProgressBar progressBar;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -33,6 +36,8 @@ public abstract class BaseMvpActivity<P extends BaseMvpInterface.Presenter>
         bindView();
         setupInstance();
         setupView();
+
+        setupUtils();
         getPresenter().onViewCreate();
         if (savedInstanceState == null) {
             initialize();
@@ -94,6 +99,27 @@ public abstract class BaseMvpActivity<P extends BaseMvpInterface.Presenter>
 
     public abstract void initialize();
 
+    public void setupDialog(String title) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setPositiveButton("ตกลง", null);
+
+        dialog = builder.create();
+    }
+
+    public void setupDialog(String title
+            , DialogInterface.OnClickListener onPositiveListener
+            , DialogInterface.OnClickListener onNegativeListener) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setPositiveButton("ตกลง", onPositiveListener)
+                .setNegativeButton("ยกเลิก", onNegativeListener);
+
+        dialog = builder.create();
+    }
+
     public void setupDialog(String title
             , String message
             , DialogInterface.OnClickListener onPositiveListener
@@ -107,17 +133,9 @@ public abstract class BaseMvpActivity<P extends BaseMvpInterface.Presenter>
 
         dialog = builder.create();
     }
-    public void setupDialog(String title
-            , DialogInterface.OnClickListener onPositiveListener
-            , DialogInterface.OnClickListener onNegativeListener) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                .setTitle(title)
-                .setPositiveButton("ตกลง", onPositiveListener)
-                .setNegativeButton("ยกเลิก", onNegativeListener);
 
-        dialog = builder.create();
-    }
+
     public void showDialog() {
         dialog.show();
     }
@@ -126,5 +144,22 @@ public abstract class BaseMvpActivity<P extends BaseMvpInterface.Presenter>
         dialog.dismiss();
     }
 
+    void setupProgressBar() {
+        progressBar = new ProgressBar(this);
 
+        progressBar.setIndeterminate(true);
+
+    }
+
+    void setupUtils() {
+        setupProgressBar();
+    }
+
+    public void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    public void showToast(String text){
+        Toast.makeText(this,text,Toast.LENGTH_SHORT).show();
+    }
 }

@@ -60,26 +60,27 @@ public class MainActivityPresenter
         return DataManager.getCustomer();
     }
 
-    boolean isAllFilled() {
-        return Arrays.binarySearch(getCustomer().getScoreList(), -1) < 0;
-    }
 
     @Override
     public void onPressOk() {
-
-        getView().showDialog();
+        if (getCustomer().isAllFilled())
+            getView().showConfirmDialog();
+        else
+            getView().showAlertItemNotFilledDialog();
     }
 
     @Override
     public void onConfirmDialog() {
-
+        getView().showToast("answers : " + Arrays.toString(getCustomer().getScoreList()));
+        getView().goLoginActivity();
     }
 
     @Override
     public void onCancelDialog() {
-
-
     }
 
-
+    @Override
+    public void onPressCancel() {
+        getView().goLoginActivity();
+    }
 }

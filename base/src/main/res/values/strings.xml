@@ -31,4 +31,6 @@
 
     <string name="main_confirm_dialog_title">ยืนยันการให้คะแนน</string>
     <string name="main_confirm_dialog_message"></string>
+
+    <string name="main_alert_fill_dialog_title">จำเป็นต้องตอบทุกคำถาม</string>
 </resources>

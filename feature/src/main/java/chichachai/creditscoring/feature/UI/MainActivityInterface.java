@@ -10,6 +10,9 @@ public class MainActivityInterface {
         void showDialog();
 
         void goLoginActivity();
+
+        void showConfirmDialog();
+        void showAlertItemNotFilledDialog();
     }
 
     public interface Presenter extends BaseMvpInterface.Presenter<MainActivityInterface.View> {
@@ -20,5 +23,7 @@ public class MainActivityInterface {
         void onConfirmDialog();
 
         void onCancelDialog();
+
+        void onPressCancel();
     }
 }
